@@ -1,0 +1,117 @@
+---
+description: Verify — проверка, security (Nuxt/Nitro), code-review (local / GitLab MR) и критерии «готово»
+alwaysApply: true
+---
+
+# Verify: не объявлять готово без проверки
+
+## Перед «готово»
+
+- [ ] Соответствует **brief** / плану
+- [ ] Пройдены проверки по **классу задачи**
+- [ ] Если в проекте есть тесты — прогнаны релевантные для scope
+- [ ] Для UI — проверка в `pnpm dev`
+- [ ] Пройден **Security (Nuxt)** — см. ниже
+- [ ] Нет отладочного мусора (`console.log`, мёртвый код)
+
+## Security (Nuxt / Nitro)
+
+- [ ] Нет секретов в diff; `.env` не в git; ключи через `runtimeConfig` / env
+- [ ] `server/api/*`: валидация `readBody()` / `getQuery()`; ошибки без утечки токенов и stack trace наружу
+- [ ] Данные с API — типы в `shared/types`, сужение на границе
+- [ ] `v-html` только с санитизацией
+- [ ] Auth/roles/cookies — только по согласованию (`00-workflow-core`)
+- [ ] HTTP — `useApi` / `useApiFetch` / `serverApi`, без ручного дублирования `baseURL`
+
+## Проверки по классу
+
+| Класс | Минимум перед «готово» |
+|-------|------------------------|
+| **S** | ReadLints или `pnpm lint` по затронутым файлам |
+| **M** | `pnpm lint:all`; при изменении типов/API — `pnpm exec nuxi typecheck` |
+| **L+** | `pnpm lint:all` + `pnpm build`; **code-review** по протоколу ниже |
+
+Не объявляй задачу выполненной, пока обязательные для класса проверки не пройдены (если агент может их запустить).
+
+## Code-review
+
+Триггеры: запрос пользователя, `/code-review`, Verify для **M+**.
+
+### Режим A — Local (по умолчанию)
+
+```bash
+git diff --name-only HEAD
+```
+
+Нет изменений → «Нечего ревьюить». Читай файлы **целиком**.
+
+### Режим B — GitLab Merge Request
+
+Если указан номер MR, URL (`…/merge_requests/N`) или ветка с открытым MR:
+
+1. **GitLab MCP** (предпочтительно): `review-merge-request` — diff, pipeline, замечания
+2. **`glab`** (если установлен):
+   ```bash
+   glab mr view <N>
+   glab mr diff <N>
+   ```
+3. **Fallback** — git:
+   ```bash
+   git fetch origin
+   git diff origin/<target-branch>...HEAD --name-only
+   ```
+
+**Pipeline:** перед APPROVE для L+ — зелёный CI (`pipeline-status` через GitLab MCP или UI). Красный pipeline → **FIX REQUIRED**, даже без замечаний по коду.
+
+Не использовать `gh pr` — платформа **GitLab**.
+
+### Чеклист (CRITICAL → LOW)
+
+**CRITICAL:** секреты; XSS (`v-html`); невалидированный ввод в `server/api`; обход auth
+
+**HIGH:** нарушение `nuxt-template.mdc`; сырой `fetch` в SFC; `any`; нет error states у `useFetch`
+
+**MEDIUM:** a11y; edge cases; `console.log`
+
+**LOW:** стиль, naming
+
+### Validation
+
+| Класс | Команды |
+|-------|---------|
+| **M** | `pnpm lint:all`; при типах/API — `pnpm exec nuxi typecheck` |
+| **L+** | + `pnpm build` |
+
+### Отчёт
+
+```markdown
+## Code Review
+
+**Режим:** local | GitLab MR !<N>
+**Решение:** OK | FIX REQUIRED | BLOCK
+**Pipeline:** pass / fail / n/a
+
+### CRITICAL / HIGH / MEDIUM / LOW
+…
+```
+
+**BLOCK** — CRITICAL. **FIX REQUIRED** — HIGH или упавший pipeline.
+
+## Review (L+ — продукт)
+
+1. **Spec** — scope из brief/MR description (`Closes #…` если есть issue)
+2. **Quality** — типы, edge cases, a11y
+3. **Consistency** — `nuxt-template.mdc`, `useApi`, `serverApi`
+
+## GitLab (общее)
+
+- MR — маленькие, с описанием; issues — `#<номер>` в коммитах/MR
+- Коммиты — conventional commits; **только по явной просьбе** пользователя
+- Не пушить без запроса; не `--no-verify` без явного разрешения
+
+## Не считать выполненным
+
+- CRITICAL/HIGH не устранены или не озвучены
+- Pipeline fail (L+)
+- `pnpm lint:all` падает (если агент мог запустить)
+- Открытые вопросы из Discuss
