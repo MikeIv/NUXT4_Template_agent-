@@ -11,7 +11,7 @@
 3. **`README.md`**: заголовок и описание под ваш продукт.
 4. **`app/pages/index.vue`**: заголовок и текст приветствия.
 5. **`cp .env.example .env`**: задайте **`NUXT_PUBLIC_API_BASE`**, если фронт ходит на отдельный API (иначе оставьте пустым — относительные пути к текущему origin).
-6. **Cursor Agent:** обновите [`.cursor/rules/90-project-context.mdc`](.cursor/rules/90-project-context.mdc) и [`.planning/PROJECT.md`](.planning/PROJECT.md) под продукт (workflow-правила `00`–`06` и `nuxt-template.mdc` уже в шаблоне).
+6. **Cursor Agent:** установите правила локально из `Cursor-rules-template` (`INSTALL-NUXT-VUE.md`); обновите `.cursor/rules/90-project-context.mdc` и [`.planning/PROJECT.md`](.planning/PROJECT.md) под продукт.
 7. **`pnpm install`** → **`pnpm run build`** и **`pnpm run lint:all`** — убедитесь, что всё зелёное.
 
 ## Требования
@@ -93,21 +93,23 @@ pnpm approve-builds --all
 
 ### Правила Cursor (Agent)
 
-Уже включены в шаблон — при развёртывании **дополнительно копировать не нужно**.
+Правила агента **не в git** — каталог `.cursor/` в `.gitignore`. Установите локально из **`Cursor-rules-template`** (`INSTALL-NUXT-VUE.md`):
 
-| Назначение | Путь |
-|------------|------|
-| Workflow (GSD + Superpowers) | [`.cursor/rules/00-workflow-core.mdc`](.cursor/rules/00-workflow-core.mdc) … `06-fundamental-principles.mdc` |
-| Контекст проекта | [`.cursor/rules/90-project-context.mdc`](.cursor/rules/90-project-context.mdc) |
-| Nuxt / Vue / SCSS / API | [`.cursor/rules/nuxt-template.mdc`](.cursor/rules/nuxt-template.mdc) |
-| Планирование | [`.planning/PROJECT.md`](.planning/PROJECT.md) |
+| Назначение | Файл (локально) |
+|------------|-----------------|
+| Workflow (GSD + Superpowers) | `.cursor/rules/00-workflow-core.mdc` … `06-fundamental-principles.mdc` |
+| Verify / security / code-review (GitLab MR) | `.cursor/rules/04-verify-and-done.mdc` |
+| Контекст проекта | `.cursor/rules/90-project-context.mdc` |
+| Nuxt / Vue / SCSS / API | `.cursor/rules/nuxt-template.mdc` |
+| Slash-команда review | `.cursor/commands/code-review.md` |
+| Планирование (в git) | [`.planning/PROJECT.md`](.planning/PROJECT.md) |
 | Справка | [`AGENTS.md`](AGENTS.md) |
 
-Внешний репозиторий правил (обновления, другие проекты): `d:\_WEB\_Work\_Cursor-rules-template\`
+Внешний репозиторий правил: `d:\_WEB\_Work\_Cursor-rules-template\`
 
 ### MCP (локально, опционально)
 
-Создайте `.cursor/mcp.json` (каталог `.cursor/` в `.gitignore`, кроме `rules/`):
+Создайте `.cursor/mcp.json` (каталог `.cursor/` полностью в `.gitignore`):
 
 ```json
 {

@@ -43,12 +43,12 @@ pnpm lint:all
 3. Обновить `90-project-context.mdc` и этот файл
 4. `cp .env.example .env`
 
-## Cursor rules
+## Cursor rules (локально, `.cursor/` в gitignore)
 
-- Workflow: `.cursor/rules/00` … `06`
-- Nuxt: `nuxt-template.mdc`
-- Контекст: `90-project-context.mdc`
-- Справка: `AGENTS.md`
+- Установка: `Cursor-rules-template` / `INSTALL-NUXT-VUE.md`
+- Workflow: `00` … `06`; Verify/review/GitLab: `04-verify-and-done.mdc`
+- Nuxt: `nuxt-template.mdc`; контекст: `90-project-context.mdc`
+- Slash: `/code-review`; справка: `AGENTS.md`
 
 ## Ограничения для агента
 
