@@ -8,24 +8,24 @@
 
 ## Стек
 
-| Слой | Технология |
-|------|------------|
-| Frontend | Nuxt 4.4, Vue 3 |
-| Lint | ESLint (@nuxt/eslint), Prettier, Stylelint |
-| Стили | SCSS, CSS Modules в SFC |
-| API | `runtimeConfig.public.apiBase` |
-| PM | pnpm 11.x |
+| Слой     | Технология                                 |
+| -------- | ------------------------------------------ |
+| Frontend | Nuxt 4.4, Vue 3                            |
+| Lint     | ESLint (@nuxt/eslint), Prettier, Stylelint |
+| Стили    | SCSS, CSS Modules в SFC                    |
+| API      | `runtimeConfig.public.apiBase`             |
+| PM       | pnpm 11.x                                  |
 
 ## Ключевые пути
 
-| Путь | Назначение |
-|------|------------|
-| `app/pages/` | Маршруты |
-| `app/layouts/default.vue` | Layout |
-| `app/composables/useApi.ts` | HTTP клиент |
-| `server/utils/serverApi.ts` | API с Nitro |
-| `shared/utils/normalizeApiBaseUrl.ts` | URL API |
-| `app/assets/styles/` | Глобальные стили и токены |
+| Путь                                  | Назначение                |
+| ------------------------------------- | ------------------------- |
+| `app/pages/`                          | Маршруты                  |
+| `app/layouts/default.vue`             | Layout                    |
+| `app/composables/useApi.ts`           | HTTP клиент               |
+| `server/utils/serverApi.ts`           | API с Nitro               |
+| `shared/utils/normalizeApiBaseUrl.ts` | URL API                   |
+| `app/assets/styles/`                  | Глобальные стили и токены |
 
 ## Команды
 

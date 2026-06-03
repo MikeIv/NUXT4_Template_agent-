@@ -95,15 +95,15 @@ pnpm approve-builds --all
 
 Правила агента **не в git** — каталог `.cursor/` в `.gitignore`. Установите локально из **`Cursor-rules-template`** (`INSTALL-NUXT-VUE.md`):
 
-| Назначение | Файл (локально) |
-|------------|-----------------|
-| Workflow (GSD + Superpowers) | `.cursor/rules/00-workflow-core.mdc` … `06-fundamental-principles.mdc` |
-| Verify / security / code-review (GitLab MR) | `.cursor/rules/04-verify-and-done.mdc` |
-| Контекст проекта | `.cursor/rules/90-project-context.mdc` |
-| Nuxt / Vue / SCSS / API | `.cursor/rules/nuxt-template.mdc` |
-| Slash-команда review | `.cursor/commands/code-review.md` |
-| Планирование (в git) | [`.planning/PROJECT.md`](.planning/PROJECT.md) |
-| Справка | [`AGENTS.md`](AGENTS.md) |
+| Назначение                                  | Файл (локально)                                                        |
+| ------------------------------------------- | ---------------------------------------------------------------------- |
+| Workflow (GSD + Superpowers)                | `.cursor/rules/00-workflow-core.mdc` … `06-fundamental-principles.mdc` |
+| Verify / security / code-review (GitLab MR) | `.cursor/rules/04-verify-and-done.mdc`                                 |
+| Контекст проекта                            | `.cursor/rules/90-project-context.mdc`                                 |
+| Nuxt / Vue / SCSS / API                     | `.cursor/rules/nuxt-template.mdc`                                      |
+| Slash-команда review                        | `.cursor/commands/code-review.md`                                      |
+| Планирование (в git)                        | [`.planning/PROJECT.md`](.planning/PROJECT.md)                         |
+| Справка                                     | [`AGENTS.md`](AGENTS.md)                                               |
 
 Внешний репозиторий правил: `d:\_WEB\_Work\_Cursor-rules-template\`
 
