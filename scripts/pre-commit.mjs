@@ -69,7 +69,7 @@ console.log()
 console.log(top)
 row('')
 row(`${bold(cyan(getPackageDisplayName()))}${dim('  ·  ')}${bold(yellow('pre-commit'))}`)
-row(dim('ESLint  →  Prettier  →  Stylelint  ·  lint-staged'))
+row(dim('lint-staged  →  Prettier (весь репозиторий, как lint:all)'))
 row('')
 console.log(bot)
 console.log()
@@ -97,18 +97,29 @@ if (lintable.length === 0) {
 const t0 = Date.now()
 const envClean = { ...process.env }
 delete envClean.NO_COLOR
+const spawnEnv = { ...envClean, FORCE_COLOR: '1' }
+
 const r = spawnSync('pnpm', ['exec', 'lint-staged', '--concurrent', 'false'], {
   cwd: root,
   stdio: 'inherit',
   shell: true,
-  env: {
-    ...envClean,
-    FORCE_COLOR: '1',
-  },
+  env: spawnEnv,
 })
-const sec = ((Date.now() - t0) / 1000).toFixed(2)
 
-const status = r.status ?? (r.signal ? 1 : 0)
+let status = r.status ?? (r.signal ? 1 : 0)
+
+/** Как `pnpm lint:all`: staged-файлы могут не включать .md, обновлённые отдельно. */
+if (status === 0) {
+  const rPrettier = spawnSync('pnpm', ['format:check'], {
+    cwd: root,
+    stdio: 'inherit',
+    shell: true,
+    env: spawnEnv,
+  })
+  status = rPrettier.status ?? (rPrettier.signal ? 1 : 0)
+}
+
+const sec = ((Date.now() - t0) / 1000).toFixed(2)
 
 console.log()
 if (status === 0) {

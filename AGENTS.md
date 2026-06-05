@@ -6,22 +6,22 @@
 
 ## Правила (`.cursor/rules/` — локально)
 
-| Файл | Назначение |
-|------|------------|
-| `00-workflow-core` | S/M/L/XL, фазы GSD + Superpowers, Verify/code-review |
-| `01-discuss-before-code` | Уточнение до кода |
-| `02-planning-gsd` | `.planning/`, волны |
-| `03-execution-discipline` | Минимальный diff, `useApi` |
-| `04-verify-and-done` | Lint, security Nuxt, code-review (local / GitLab MR) |
-| `05-context-hygiene` | Узкий контекст |
+| Файл                        | Назначение                                                          |
+| --------------------------- | ------------------------------------------------------------------- |
+| `00-workflow-core`          | S/M/L/XL, фазы GSD + Superpowers, Verify/code-review                |
+| `01-discuss-before-code`    | Уточнение до кода                                                   |
+| `02-planning-gsd`           | `.planning/`, волны                                                 |
+| `03-execution-discipline`   | Минимальный diff, `useApi`                                          |
+| `04-verify-and-done`        | Lint, security Nuxt, code-review (local / GitLab MR)                |
+| `05-context-hygiene`        | Узкий контекст                                                      |
 | `06-fundamental-principles` | Мета-принципы: причина vs симптом, типы, эталоны, минимализм правил |
-| `90-project-context` | Контекст шаблона / продукта, GitLab |
-| `nuxt-template` | Nuxt 4, Vue, SCSS, линты |
+| `90-project-context`        | Контекст шаблона / продукта, GitLab                                 |
+| `nuxt-template`             | Nuxt 4, Vue, SCSS, линты                                            |
 
 ## Slash-команды (`.cursor/commands/` — локально)
 
-| Команда | Назначение |
-|---------|------------|
+| Команда        | Назначение                               |
+| -------------- | ---------------------------------------- |
 | `/code-review` | Review локальных изменений или GitLab MR |
 
 ## После копирования в новый репозиторий
