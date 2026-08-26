@@ -1,6 +1,6 @@
 # Nuxt 4 — стартовый шаблон
 
-Универсальный каркас на **Nuxt 4.4.x** (Vue 3, TypeScript, Nitro): `srcDir: app/`, ESLint + Prettier + Stylelint, Husky, глобальные SCSS-токены, **HTTP API** (`useApi` / `useApiFetch` / `serverApi`). Пакетный менеджер — **pnpm** (см. `packageManager` в `package.json`).
+Универсальный каркас на **Nuxt 4.5.x** (Vue 3, TypeScript, Nitro): `srcDir: app/`, ESLint + Prettier + Stylelint, Husky, глобальные SCSS-токены, **HTTP API** (`useApi` / `useApiFetch` / `serverApi`). Пакетный менеджер — **pnpm** (см. `packageManager` в `package.json`).
 
 В репозитории `Grand` этот же каркас используется для **FoodSity**; при копировании в новый проект достаточно переименовать пакет и брендинг (см. ниже).
 
@@ -12,11 +12,11 @@
 4. **`app/pages/index.vue`**: заголовок и текст приветствия.
 5. **`cp .env.example .env`**: задайте **`NUXT_PUBLIC_API_BASE`**, если фронт ходит на отдельный API (иначе оставьте пустым — относительные пути к текущему origin).
 6. **Cursor Agent:** установите правила локально из `Cursor-rules-template` (`INSTALL-NUXT-VUE.md`); обновите `.cursor/rules/90-project-context.mdc` и [`.planning/PROJECT.md`](.planning/PROJECT.md) под продукт.
-7. **`pnpm install`** → **`pnpm run build`** и **`pnpm run lint:all`** — убедитесь, что всё зелёное.
+7. **`pnpm install`** → **`pnpm verify`** и **`pnpm build`** — убедитесь, что всё зелёное.
 
 ## Требования
 
-- Node.js LTS (рекомендуется актуальная LTS)
+- Node.js LTS (рекомендуется актуальная LTS; Nuxt 4.5 — Node `^22.19.0 || ^24.11.0 || >=26.0.0`, см. `engines` в `package.json`)
 - [pnpm](https://pnpm.io/) 11.x (в репозитории зафиксирована версия через поле `packageManager` и Corepack)
 
 ## Установка
@@ -48,7 +48,7 @@ pnpm exec husky
 pnpm approve-builds --all
 ```
 
-В `package.json` уже указан `pnpm.onlyBuiltDependencies` для `unrs-resolver` (см. блок `pnpm`).
+Сборки нативных зависимостей разрешены в [`pnpm-workspace.yaml`](pnpm-workspace.yaml) (`allowBuilds` + `onlyBuiltDependencies`).
 
 ## Скрипты
 
@@ -65,6 +65,8 @@ pnpm approve-builds --all
 | `pnpm stylelint`     | Stylelint для `*.vue` и `*.css`                                          |
 | `pnpm stylelint:fix` | Stylelint с автоисправлением                                             |
 | `pnpm lint:all`      | последовательно ESLint + Prettier (check) + Stylelint                    |
+| `pnpm typecheck`     | `nuxt typecheck`                                                         |
+| `pnpm verify`        | `lint:all` + `typecheck`                                                 |
 
 ## Качество кода и pre-commit
 
@@ -73,6 +75,7 @@ pnpm approve-builds --all
 - **Stylelint**: минимальная конфигурация для стилей в SFC — [`stylelint.config.mjs`](stylelint.config.mjs).
 - **Husky**: хук [`.husky/pre-commit`](.husky/pre-commit) вызывает [`scripts/pre-commit.mjs`](scripts/pre-commit.mjs) — баннер с именем из `package.json`, lint-staged с флагом `--concurrent false`.
 - **lint-staged**: [`lint-staged.config.mjs`](lint-staged.config.mjs). Если в коммите только файлы вне типов для линта, проверки **пропускаются** с пояснением.
+- **CI**: минимальный GitLab pipeline — [`.gitlab-ci.yml`](.gitlab-ci.yml) (`pnpm verify` → `pnpm build`).
 
 Коммит без хуков: `git commit --no-verify` (использовать осознанно).
 
@@ -82,7 +85,9 @@ pnpm approve-builds --all
 
 Общий код клиента и Nitro — в **`shared/types`** и **`shared/utils`**.
 
-Сервер Nitro — в **`server/`** (`api/`, `routes/`, `middleware/`, `plugins/`, `utils/`).
+Сервер Nitro — в **`server/`** (`api/`, `routes/`, `middleware/`, `plugins/`, `utils`).
+
+Стили: токены `--fs-*`, mobile-first (миксины `from-mobile` / `from-tablet` / `from-desktop`). В SFC: `@use 'tools' as *;` (`vite.css.preprocessorOptions.scss.loadPaths` → `app/assets/styles`).
 
 ## HTTP API (каркас)
 
@@ -95,21 +100,20 @@ pnpm approve-builds --all
 
 Правила агента **не в git** — каталог `.cursor/` в `.gitignore`. Установите локально из **`Cursor-rules-template`** (`INSTALL-NUXT-VUE.md`):
 
-| Назначение                                  | Файл (локально)                                                        |
-| ------------------------------------------- | ---------------------------------------------------------------------- |
-| Workflow (GSD + Superpowers)                | `.cursor/rules/00-workflow-core.mdc` … `06-fundamental-principles.mdc` |
-| Verify / security / code-review (GitLab MR) | `.cursor/rules/04-verify-and-done.mdc`                                 |
-| Контекст проекта                            | `.cursor/rules/90-project-context.mdc`                                 |
-| Nuxt / Vue / SCSS / API                     | `.cursor/rules/nuxt-template.mdc`                                      |
-| Slash-команда review                        | `.cursor/commands/code-review.md`                                      |
-| Планирование (в git)                        | [`.planning/PROJECT.md`](.planning/PROJECT.md)                         |
-| Справка                                     | [`AGENTS.md`](AGENTS.md)                                               |
+| Назначение                     | Файл (локально)                                              |
+| ------------------------------ | ------------------------------------------------------------ |
+| always: GSD / токены / продукт | `00-workflow-core`, `07-token-economy`, `90-project-context` |
+| globs: Nuxt / Vue / SCSS       | `.cursor/rules/nuxt-template.mdc`                            |
+| requestable: Discuss…Verify    | `01` … `06`                                                  |
+| Slash                          | `/brief` `/wave-done` `/verify` `/code-review`               |
+| Планирование (в git)           | [`.planning/PROJECT.md`](.planning/PROJECT.md)               |
+| Справка                        | [`AGENTS.md`](AGENTS.md)                                     |
 
 Внешний репозиторий правил: `d:\_WEB\_Work\_Cursor-rules-template\`
 
 ### MCP (локально, опционально)
 
-Создайте `.cursor/mcp.json` (каталог `.cursor/` полностью в `.gitignore`):
+`.cursor/mcp.json` (каталог `.cursor/` полностью в `.gitignore`):
 
 ```json
 {
@@ -119,10 +123,16 @@ pnpm approve-builds --all
     "context7": {
       "command": "npx",
       "args": ["-y", "@context7/mcp-server"]
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
     }
   }
 }
 ```
+
+Сервер `figma` нужен, если в продукте есть макет; иначе его можно не указывать.
 
 ## Документация
 

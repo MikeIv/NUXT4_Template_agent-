@@ -4,17 +4,17 @@
 
 ## Назначение
 
-Универсальный стартовый каркас Grand: Nuxt 4.4, Vue 3, TypeScript, Nitro, ESLint + Prettier + Stylelint, Husky, SCSS-токены (`--fs-*`), HTTP API (`useApi`, `useApiFetch`, `serverApi`).
+Универсальный стартовый каркас Grand: Nuxt 4.5, Vue 3, TypeScript, Nitro, ESLint + Prettier + Stylelint, Husky, SCSS-токены (`--fs-*`), HTTP API (`useApi`, `useApiFetch`, `serverApi`).
 
 ## Стек
 
-| Слой     | Технология                                 |
-| -------- | ------------------------------------------ |
-| Frontend | Nuxt 4.4, Vue 3                            |
-| Lint     | ESLint (@nuxt/eslint), Prettier, Stylelint |
-| Стили    | SCSS, CSS Modules в SFC                    |
-| API      | `runtimeConfig.public.apiBase`             |
-| PM       | pnpm 11.x                                  |
+| Слой     | Технология                                        |
+| -------- | ------------------------------------------------- |
+| Frontend | Nuxt 4.5, Vue 3, SSR включён                      |
+| Lint     | ESLint (@nuxt/eslint), Prettier, Stylelint, Husky |
+| Стили    | SCSS, CSS Modules, mobile-first (`from-*`)        |
+| API      | `runtimeConfig.public.apiBase`                    |
+| PM       | pnpm 11.x                                         |
 
 ## Ключевые пути
 
@@ -26,12 +26,15 @@
 | `server/utils/serverApi.ts`           | API с Nitro               |
 | `shared/utils/normalizeApiBaseUrl.ts` | URL API                   |
 | `app/assets/styles/`                  | Глобальные стили и токены |
+| `types/nuxt-public.d.ts`              | Типы `public.apiBase`     |
 
 ## Команды
 
 ```bash
 pnpm install
 pnpm dev
+pnpm typecheck
+pnpm verify
 pnpm build
 pnpm lint:all
 ```
@@ -42,16 +45,18 @@ pnpm lint:all
 2. Переименовать `package.json`, README, главную страницу
 3. Обновить `90-project-context.mdc` и этот файл
 4. `cp .env.example .env`
+5. `pnpm install` → `pnpm verify` → `pnpm build`
 
 ## Cursor rules (локально, `.cursor/` в gitignore)
 
 - Установка: `Cursor-rules-template` / `INSTALL-NUXT-VUE.md`
-- Workflow: `00` … `06`; Verify/review/GitLab: `04-verify-and-done.mdc`
-- Nuxt: `nuxt-template.mdc`; контекст: `90-project-context.mdc`
-- Slash: `/code-review`; справка: `AGENTS.md`
+- always: `00`, `07`, `90` · globs: `nuxt-template` · requestable: `01`–`06`
+- Slash: `/brief` `/wave-done` `/verify` `/code-review`
+- Справка: `AGENTS.md`
 
 ## Ограничения для агента
 
-- API только через обёртки шаблона
+- API только через `useApi` / `useApiFetch` / `serverApi`
+- Стили: `--fs-*`, mobile-first, без desktop-first `max-width`
 - Не коммитить `.env`
 - Минимальный diff, без лишнего рефакторинга
