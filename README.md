@@ -11,8 +11,7 @@
 3. **`README.md`**: заголовок и описание под ваш продукт.
 4. **`app/pages/index.vue`**: заголовок и текст приветствия.
 5. **`cp .env.example .env`**: задайте **`NUXT_PUBLIC_API_BASE`**, если фронт ходит на отдельный API (иначе оставьте пустым — относительные пути к текущему origin).
-6. **Cursor Agent:** установите правила локально из `Cursor-rules-template` (`INSTALL-NUXT-VUE.md`); обновите `.cursor/rules/90-project-context.mdc` и `.planning/PROJECT.md` под продукт.
-7. **`pnpm install`** → **`pnpm verify`** и **`pnpm build`** — убедитесь, что всё зелёное.
+6. **`pnpm install`** → **`pnpm verify`** и **`pnpm build`** — убедитесь, что всё зелёное.
 
 ## Требования
 
@@ -95,44 +94,6 @@ pnpm approve-builds --all
 - Клиент: **`useApi()`** (`$fetch` с `baseURL`) и **`useApiFetch()`** (полный URL = `apiBase` + путь, без `baseURL` в опциях `useFetch`) — [`app/composables/useApi.ts`](app/composables/useApi.ts).
 - Сервер: **`serverApi(event?)`** — [`server/utils/serverApi.ts`](server/utils/serverApi.ts); URL — [`shared/utils/normalizeApiBaseUrl.ts`](shared/utils/normalizeApiBaseUrl.ts) (`normalizeApiBaseUrl`, `joinApiUrl`).
 - Типизация `public.apiBase` — [`types/nuxt-public.d.ts`](types/nuxt-public.d.ts). Приватные ключи `runtimeConfig` добавляйте в `nuxt.config` и отдельное расширение `RuntimeConfig` в `types/`.
-
-### Правила Cursor (Agent)
-
-Правила агента **не в git** — `.cursor/`, `AGENTS.md` и `.planning/` в `.gitignore`. Установите локально из **`Cursor-rules-template`** (`INSTALL-NUXT-VUE.md`):
-
-| Назначение                     | Файл (локально)                                              |
-| ------------------------------ | ------------------------------------------------------------ |
-| always: GSD / токены / продукт | `00-workflow-core`, `07-token-economy`, `90-project-context` |
-| globs: Nuxt / Vue / SCSS       | `.cursor/rules/nuxt-template.mdc`                            |
-| requestable: Discuss…Verify    | `01` … `06`                                                  |
-| Slash                          | `/brief` `/wave-done` `/verify` `/code-review`               |
-| Планирование (локально)        | `.planning/`                                                 |
-| Справка (локально)             | `AGENTS.md`                                                  |
-
-Внешний репозиторий правил: `d:\_WEB\_Work\_Cursor-rules-template\`
-
-### MCP (локально, опционально)
-
-`.cursor/mcp.json` (каталог `.cursor/` полностью в `.gitignore`):
-
-```json
-{
-  "$schema": "https://json.schemastore.org/mcp.json",
-  "mcpServers": {
-    "nuxt": { "url": "https://mcp.nuxt.com/mcp" },
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@context7/mcp-server"]
-    },
-    "figma": {
-      "type": "http",
-      "url": "https://mcp.figma.com/mcp"
-    }
-  }
-}
-```
-
-Сервер `figma` нужен, если в продукте есть макет; иначе его можно не указывать.
 
 ## Документация
 
