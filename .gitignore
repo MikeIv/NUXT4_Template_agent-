@@ -22,10 +22,11 @@ logs
 .fleet
 .idea
 
-# Cursor — полностью локально (rules, commands, mcp.json)
+# Cursor — полностью локально (rules, commands, mcp.json, карта агента)
 .cursor/
 .cursorrules
 CURSOR_RULES_EXPORT.md
+AGENTS.md
 .vscode
 
 # Локальные артефакты агента (аудит, не в git)

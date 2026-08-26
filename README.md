@@ -98,7 +98,7 @@ pnpm approve-builds --all
 
 ### Правила Cursor (Agent)
 
-Правила агента **не в git** — каталог `.cursor/` в `.gitignore`. Установите локально из **`Cursor-rules-template`** (`INSTALL-NUXT-VUE.md`):
+Правила агента **не в git** — каталог `.cursor/` и `AGENTS.md` в `.gitignore`. Установите локально из **`Cursor-rules-template`** (`INSTALL-NUXT-VUE.md`):
 
 | Назначение                     | Файл (локально)                                              |
 | ------------------------------ | ------------------------------------------------------------ |
@@ -107,7 +107,7 @@ pnpm approve-builds --all
 | requestable: Discuss…Verify    | `01` … `06`                                                  |
 | Slash                          | `/brief` `/wave-done` `/verify` `/code-review`               |
 | Планирование (в git)           | [`.planning/PROJECT.md`](.planning/PROJECT.md)               |
-| Справка                        | [`AGENTS.md`](AGENTS.md)                                     |
+| Справка (локально)             | `AGENTS.md`                                                  |
 
 Внешний репозиторий правил: `d:\_WEB\_Work\_Cursor-rules-template\`
 
