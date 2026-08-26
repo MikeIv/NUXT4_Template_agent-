@@ -11,7 +11,7 @@
 3. **`README.md`**: заголовок и описание под ваш продукт.
 4. **`app/pages/index.vue`**: заголовок и текст приветствия.
 5. **`cp .env.example .env`**: задайте **`NUXT_PUBLIC_API_BASE`**, если фронт ходит на отдельный API (иначе оставьте пустым — относительные пути к текущему origin).
-6. **Cursor Agent:** установите правила локально из `Cursor-rules-template` (`INSTALL-NUXT-VUE.md`); обновите `.cursor/rules/90-project-context.mdc` и [`.planning/PROJECT.md`](.planning/PROJECT.md) под продукт.
+6. **Cursor Agent:** установите правила локально из `Cursor-rules-template` (`INSTALL-NUXT-VUE.md`); обновите `.cursor/rules/90-project-context.mdc` и `.planning/PROJECT.md` под продукт.
 7. **`pnpm install`** → **`pnpm verify`** и **`pnpm build`** — убедитесь, что всё зелёное.
 
 ## Требования
@@ -98,7 +98,7 @@ pnpm approve-builds --all
 
 ### Правила Cursor (Agent)
 
-Правила агента **не в git** — каталог `.cursor/` и `AGENTS.md` в `.gitignore`. Установите локально из **`Cursor-rules-template`** (`INSTALL-NUXT-VUE.md`):
+Правила агента **не в git** — `.cursor/`, `AGENTS.md` и `.planning/` в `.gitignore`. Установите локально из **`Cursor-rules-template`** (`INSTALL-NUXT-VUE.md`):
 
 | Назначение                     | Файл (локально)                                              |
 | ------------------------------ | ------------------------------------------------------------ |
@@ -106,7 +106,7 @@ pnpm approve-builds --all
 | globs: Nuxt / Vue / SCSS       | `.cursor/rules/nuxt-template.mdc`                            |
 | requestable: Discuss…Verify    | `01` … `06`                                                  |
 | Slash                          | `/brief` `/wave-done` `/verify` `/code-review`               |
-| Планирование (в git)           | [`.planning/PROJECT.md`](.planning/PROJECT.md)               |
+| Планирование (локально)        | `.planning/`                                                 |
 | Справка (локально)             | `AGENTS.md`                                                  |
 
 Внешний репозиторий правил: `d:\_WEB\_Work\_Cursor-rules-template\`
