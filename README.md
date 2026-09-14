@@ -12,6 +12,22 @@
 4. **`app/pages/index.vue`**: заголовок и текст приветствия.
 5. **`cp .env.example .env`**: задайте **`NUXT_PUBLIC_API_BASE`**, если фронт ходит на отдельный API (иначе оставьте пустым — относительные пути к текущему origin).
 6. **`pnpm install`** → **`pnpm verify`** и **`pnpm build`** — убедитесь, что всё зелёное.
+7. Обновите **`90-project-context.mdc`**, **`.planning/PROJECT.md`**, **`AGENTS.md`** под продукт.
+
+## Правила Cursor (Agent)
+
+В шаблоне в git — полный инструментарий: `.cursor/` (rules, commands, `mcp.json`), `AGENTS.md`, `.planning/` (`PROJECT.md`, `*-template.md`, `brief.md` / `plan.md` / `state.md`). Скачал репо — можно сразу работать с агентом.
+
+В **новом продукте** сессионные файлы планирования обычно добавляют в `.gitignore` — см. `snippets/gitignore-snippet.txt` в `_Cursor-rules-template`.
+
+| Режим | Правила |
+| --- | --- |
+| always | `00`, `07`, `90` |
+| globs | `nuxt-template` (`app/` · `server/` · `shared/`) |
+| requestable | `01`–`06` |
+
+Slash: `/brief` `/wave-done` `/verify` `/code-review`.
+Синхронизация workflow: `d:\_WEB\_Work\_Cursor-rules-template` (`00`–`07`); `90` — только дополнять.
 
 ## Требования
 

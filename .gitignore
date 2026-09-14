@@ -22,16 +22,8 @@ logs
 .fleet
 .idea
 
-# Cursor / агент — полностью локально
-.cursor/
-.cursorrules
-CURSOR_RULES_EXPORT.md
-AGENTS.md
-.planning/
+# IDE
 .vscode
-
-# Локальные артефакты агента (аудит, не в git)
-docs/audit-*.md
 
 # Local env files
 .env
