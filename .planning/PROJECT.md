@@ -50,7 +50,8 @@ pnpm lint:all
 ## Cursor rules (в git шаблона)
 
 - Эталон workflow: `_Cursor-rules-template` / `INSTALL-NUXT-VUE.md`
-- В шаблоне: `.cursor/` (rules, commands, `mcp.json`), `AGENTS.md`, весь `.planning/`
+- В шаблоне: `.cursor/` (rules, commands, пустой `mcp.json`), `AGENTS.md`, весь `.planning/`
+- MCP: User `~/.cursor/mcp.json`; проектный `mcpServers` не заполнять
 - В продукте: сессионные `brief.md` / `plan.md` / `state.md` обычно в `.gitignore` (не в этом шаблоне)
 - always: `00`, `07`, `90` · globs: `nuxt-template` · requestable: `01`–`06`
 - Slash: `/brief` `/wave-done` `/verify` `/code-review`

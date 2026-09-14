@@ -7,24 +7,24 @@
 
 ## Карта правил
 
-| Правило | Режим | Назначение |
-| --- | --- | --- |
-| `00` | **always** | GSD, краткий Verify |
-| `07` | **always** | Экономия токенов (чат + MCP) |
-| `90` | **always** | Контекст шаблона / продукта |
-| `nuxt-template` | **globs** app/server/shared | TS, Vue, SCSS, mobile-first |
-| `01`–`06` | **requestable** | Discuss … Principles |
+| Правило         | Режим                       | Назначение                   |
+| --------------- | --------------------------- | ---------------------------- |
+| `00`            | **always**                  | GSD, краткий Verify          |
+| `07`            | **always**                  | Экономия токенов (чат + MCP) |
+| `90`            | **always**                  | Контекст шаблона / продукта  |
+| `nuxt-template` | **globs** app/server/shared | TS, Vue, SCSS, mobile-first  |
+| `01`–`06`       | **requestable**             | Discuss … Principles         |
 
 ## Команды
 
-| Команда | Назначение |
-| --- | --- |
-| `/brief` | `brief.md` из шаблона |
-| `/wave-done` | Итог волны в `state.md` |
-| `/verify` | Проверки по классу |
-| `/code-review` | Local или GitLab MR |
+| Команда        | Назначение              |
+| -------------- | ----------------------- |
+| `/brief`       | `brief.md` из шаблона   |
+| `/wave-done`   | Итог волны в `state.md` |
+| `/verify`      | Проверки по классу      |
+| `/code-review` | Local или GitLab MR     |
 
-MCP: `.cursor/mcp.json` (nuxt, context7, опционально figma).
+MCP: User `~/.cursor/mcp.json` (nuxt, context7, figma, mdn). Проектный `.cursor/mcp.json` — пустой `mcpServers`. GitLab → GitKraken.
 
 ## Промпт агенту
 

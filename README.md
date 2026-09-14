@@ -16,15 +16,15 @@
 
 ## Правила Cursor (Agent)
 
-В шаблоне в git — полный инструментарий: `.cursor/` (rules, commands, `mcp.json`), `AGENTS.md`, `.planning/` (`PROJECT.md`, `*-template.md`, `brief.md` / `plan.md` / `state.md`). Скачал репо — можно сразу работать с агентом.
+В шаблоне в git — полный инструментарий: `.cursor/` (rules, commands, пустой `mcp.json`), `AGENTS.md`, `.planning/` (`PROJECT.md`, `*-template.md`, `brief.md` / `plan.md` / `state.md`). MCP-серверы — в User `~/.cursor/mcp.json` (один раз на машину); проектный файл не дублирует имена, иначе Cursor отключает User-копии. Скачал репо — можно сразу работать с агентом.
 
 В **новом продукте** сессионные файлы планирования обычно добавляют в `.gitignore` — см. `snippets/gitignore-snippet.txt` в `_Cursor-rules-template`.
 
-| Режим | Правила |
-| --- | --- |
-| always | `00`, `07`, `90` |
-| globs | `nuxt-template` (`app/` · `server/` · `shared/`) |
-| requestable | `01`–`06` |
+| Режим       | Правила                                          |
+| ----------- | ------------------------------------------------ |
+| always      | `00`, `07`, `90`                                 |
+| globs       | `nuxt-template` (`app/` · `server/` · `shared/`) |
+| requestable | `01`–`06`                                        |
 
 Slash: `/brief` `/wave-done` `/verify` `/code-review`.
 Синхронизация workflow: `d:\_WEB\_Work\_Cursor-rules-template` (`00`–`07`); `90` — только дополнять.

@@ -36,9 +36,13 @@ pnpm dev | typecheck | verify | build | lint:all
 
 ## MCP
 
+Серверы — **User** `~/.cursor/mcp.json`. Проектный `.cursor/mcp.json` — пустой `mcpServers` (иначе Cursor отключает User-копии с теми же именами). Не прописывать nuxt / context7 / figma / mdn в проект.
+
 - Доки библиотек → **context7**
-- Nuxt API / модули → **nuxt** (`https://mcp.nuxt.com/mcp`)
-- Макет → **figma** (`https://mcp.figma.com/mcp`), если есть файл
+- Nuxt API / модули → **nuxt** (`https://nuxt.com/mcp`)
+- Макет → **figma**, если есть файл
+- Web platform / compat → **mdn**
+- GitLab → GitKraken (User extension), не дублировать official GitLab MCP
 - Код проекта → read/grep; широкий поиск → Task explore
 
 ## Ограничения
