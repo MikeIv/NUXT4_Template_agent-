@@ -12,13 +12,13 @@ alwaysApply: true
 | Класс  | Примеры           | Процесс                                     |
 | ------ | ----------------- | ------------------------------------------- |
 | **S**  | typo, rename      | Execute → Verify                            |
-| **M**  | фича, 1–3 файла   | Discuss → Execute → Verify                  |
-| **L**  | модуль, >5 файлов | Discuss → Plan → Execute (волнами) → Verify |
+| **M**  | фича, 1–4 файла   | Discuss → Execute → Verify                  |
+| **L**  | модуль, 5+ файлов | Discuss → Plan → Execute (волнами) → Verify |
 | **XL** | миграция          | Полный цикл + `.planning/`                  |
 
 **Фазы:** Discuss (`01`) → Plan (`02`, L+) → Execute (`03`) → Verify (`04`).
 
-**Verify (кратко):** S — lint · M — `pnpm lint:all` (+ `pnpm typecheck` при API/типах) · L+ — `pnpm verify` + `pnpm build` + `/code-review`. M + HTTP composables — mini-review CRITICAL/HIGH из `04`.
+**Verify:** по `04` — S lint · M `pnpm lint:all` (+ `typecheck` при API) · L+ `pnpm verify` + `pnpm build`.
 
 **Принципы:** минимальный diff · эталон из репо (`90`) · причина, не симптом (M+) · типы первыми (L+/API) · неуверенность → Discuss.
 

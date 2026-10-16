@@ -29,12 +29,7 @@ description: Гигиена контекста — узкий input, handoff ч�
 
 См. `90`. Лимиты — `07`.
 
-**Figma (вёрстка секции):**
-
-1. Контекст секции — один раз (Cursor — MCP, DS Harness — REST `09-figma-rest`)
-2. **`get_design_context`** — один primary node (mobile-first)
-3. **`get_screenshot`** — tablet/desktop/UI-kit, если в промпте несколько URL
-4. Не параллелить несколько `get_design_context` — главный источник перерасхода токенов
+**Figma (вёрстка секции):** лимиты — `07`, процедура и REST — `09-figma-rest`.
 
 **Browser MCP** — только по явному запросу пользователя; не для Verify класса **M** (`04`).
 
