@@ -2,7 +2,7 @@
 
 Универсальный каркас на **Nuxt 4.5.x** (Vue 3, TypeScript, Nitro): `srcDir: app/`, ESLint + Prettier + Stylelint, Husky, глобальные SCSS-токены, **HTTP API** (`useApi` / `useApiFetch` / `serverApi`). Пакетный менеджер — **pnpm** (см. `packageManager` в `package.json`).
 
-В репозитории `Grand` этот же каркас используется для **FoodSity**; при копировании в новый проект достаточно переименовать пакет и брендинг (см. ниже).
+Шаблон нейтрален к продукту: при копировании достаточно переименовать пакет и брендинг (см. ниже).
 
 ## Новый проект на базе шаблона
 
@@ -12,13 +12,22 @@
 4. **`app/pages/index.vue`**: заголовок и текст приветствия.
 5. **`cp .env.example .env`**: задайте **`NUXT_PUBLIC_API_BASE`**, если фронт ходит на отдельный API (иначе оставьте пустым — относительные пути к текущему origin).
 6. **`pnpm install`** → **`pnpm verify`** и **`pnpm build`** — убедитесь, что всё зелёное.
-7. Обновите **`90-project-context.mdc`**, **`.planning/PROJECT.md`**, **`AGENTS.md`** под продукт.
+7. Обновите **`90-project-context.mdc`** и **`.planning/PROJECT.md`** под продукт, затем выполните **`node .cursor/sync-rules.mjs`** — он перегенерирует `AGENTS.md` и скиллы в `.dsh/skills/`. Руками эти файлы не правят.
 
 ## Правила Cursor (Agent)
 
-В шаблоне в git — полный инструментарий: `.cursor/` (rules, commands, пустой `mcp.json`), `AGENTS.md`, `.planning/` (`PROJECT.md`, `*-template.md`, `brief.md` / `plan.md` / `state.md`). MCP-серверы — в User `~/.cursor/mcp.json` (один раз на машину); проектный файл не дублирует имена, иначе Cursor отключает User-копии. Скачал репо — можно сразу работать с агентом.
+В шаблоне в git — полный инструментарий: `.cursor/` (rules, commands, пустой `mcp.json`), `AGENTS.md`, `.dsh/skills/` (скиллы DS Harness), `.planning/` (`PROJECT.md`, `*-template.md`). `AGENTS.md` и `.dsh/skills/` генерируются из правил скриптом `node .cursor/sync-rules.mjs`; сессионные `brief.md` / `plan.md` / `state.md` в git не хранятся. MCP-серверы — в User `~/.cursor/mcp.json` (один раз на машину); проектный файл не дублирует имена, иначе Cursor отключает User-копии. Скачал репо — можно сразу работать с агентом.
 
-В **новом продукте** сессионные файлы планирования обычно добавляют в `.gitignore` — см. `snippets/gitignore-snippet.txt` в `_Cursor-rules-template`.
+Сессионные файлы планирования не хранятся в git (шаблон и продукт одинаково):
+
+```gitignore
+.planning/brief.md
+.planning/plan.md
+.planning/state.md
+.planning/figma/
+```
+
+Живые файлы создаются из шаблонов `brief-template.md` / `plan-template.md` / `state-template.md`.
 
 | Режим       | Правила                                          |
 | ----------- | ------------------------------------------------ |
@@ -27,7 +36,7 @@
 | requestable | `01`–`06`, `09`                                  |
 
 Slash: `/brief` `/wave-done` `/verify` `/code-review`.
-Синхронизация workflow: `d:\_WEB\_Work\_Cursor-rules-template` (`00`–`09`); `90` — только дополнять.
+Синхронизация workflow: внешний репозиторий-источник `_Cursor-rules-template` (`00`–`09`, `commands`); `90-project-context` — только дополнять под продукт.
 
 ## Требования
 

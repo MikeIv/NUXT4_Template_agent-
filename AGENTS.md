@@ -1,6 +1,6 @@
 <!-- ФАЙЛ СГЕНЕРИРОВАН: .cursor/sync-rules.mjs — не редактируй вручную. -->
 <!-- Источник правил: .cursor/rules/*.mdc. Обновить: node .cursor/sync-rules.mjs -->
-<!-- Включены правила с alwaysApply: true — 4 шт., 11928 байт. -->
+<!-- Включены правила с alwaysApply: true — 4 шт., 12048 байт. -->
 <!-- Остальные правила лежат скиллами в .dsh/skills и подгружаются по требованию: 01-discuss-before-code (процесс); 02-planning-gsd (процесс); 03-execution-discipline (процесс); 04-verify-and-done (процесс); 05-context-hygiene (процесс); 06-fundamental-principles (процесс); 09-figma-rest (процесс); nuxt-template (app/**/*.{ts,vue,scss},server/**/*.{ts,vue,scss},shared/**/*.{ts,vue,scss}). -->
 <!-- Если задача касается этих путей или фазы — загрузи скилл до работы. -->
 
@@ -118,7 +118,7 @@
 
 **Пакет:** переименовать в новом проекте · **SSR:** включён.
 
-**Назначение:** каркас Grand (Nuxt 4.5, Vue 3, TS, Nitro, `--fs-*`, `useApi`). После копирования обновите этот файл и локальный `.planning/PROJECT.md`.
+**Назначение:** универсальный каркас (Nuxt 4.5, Vue 3, TS, Nitro, `--fs-*`, `useApi`). После копирования обновите этот файл и `.planning/PROJECT.md`, затем `node .cursor/sync-rules.mjs` — `AGENTS.md` и `.dsh/skills` генерируются из правил.
 
 ## Команды
 

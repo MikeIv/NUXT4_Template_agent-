@@ -3,8 +3,8 @@
 Этот файл читается агентом наравне с `AGENTS.md`, но в отличие от него **правится вручную**:
 `AGENTS.md` генерируется из `.cursor/rules` командой `node .cursor/sync-rules.mjs`.
 
-Полный инструментарий в репо: `.cursor/`, `AGENTS.md`, `.planning/` (PROJECT, templates, brief/plan/state).
-После копирования в продукт обновите `90` и `.planning/PROJECT.md`; сессионные файлы при необходимости добавьте в gitignore продукта.
+Полный инструментарий в репо: `.cursor/`, `AGENTS.md`, `.dsh/skills/`, `.planning/` (PROJECT, templates).
+После копирования в продукт обновите `90` и `.planning/PROJECT.md`, затем `node .cursor/sync-rules.mjs` (перегенерирует `AGENTS.md` и скиллы); проверка рассинхрона — `node .cursor/check-rules.mjs`.
 
 Синхронизация workflow: `_Cursor-rules-template` (`00`–`09`, commands); `90-project-context` — только дополнять.
 

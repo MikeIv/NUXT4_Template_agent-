@@ -1,10 +1,10 @@
 # Nuxt 4 Template — PROJECT
 
-Постоянный контекст для Cursor Agent. **Обновите после копирования шаблона в продуктовый репозиторий.**
+Постоянный контекст для агента (Cursor / DS Harness). **Обновите после копирования шаблона в продуктовый репозиторий.**
 
 ## Назначение
 
-Универсальный стартовый каркас Grand: Nuxt 4.5, Vue 3, TypeScript, Nitro, ESLint + Prettier + Stylelint, Husky, SCSS-токены (`--fs-*`), HTTP API (`useApi`, `useApiFetch`, `serverApi`).
+Универсальный стартовый каркас: Nuxt 4.5, Vue 3, TypeScript, Nitro, ESLint + Prettier + Stylelint, Husky, SCSS-токены (`--fs-*`), HTTP API (`useApi`, `useApiFetch`, `serverApi`).
 
 ## Стек
 
@@ -44,16 +44,18 @@ pnpm lint:all
 1. Скопировать репозиторий / fork
 2. Переименовать `package.json`, README, главную страницу
 3. Обновить `90-project-context.mdc` и этот файл
-4. `cp .env.example .env`
-5. `pnpm install` → `pnpm verify` → `pnpm build`
+4. `node .cursor/sync-rules.mjs` — пересобрать `AGENTS.md` и `.dsh/skills`
+5. `cp .env.example .env`
+6. `pnpm install` → `pnpm verify` → `pnpm build`
 
 ## Cursor rules (в git шаблона)
 
-- Эталон workflow: `_Cursor-rules-template` / `INSTALL-NUXT-VUE.md`
-- В шаблоне: `.cursor/` (rules, commands, пустой `mcp.json`), `AGENTS.md`, весь `.planning/`
+- Эталон workflow: внешний репозиторий-источник `_Cursor-rules-template` (`00`–`09`, `commands`)
+- В шаблоне: `.cursor/` (rules, commands, пустой `mcp.json`), `AGENTS.md`, `.dsh/skills/`, `PROJECT.md` и `*-template.md`
+- Генерация: `node .cursor/sync-rules.mjs` → `AGENTS.md` + `.dsh/skills`; рассинхрон ловит `node .cursor/check-rules.mjs`
 - MCP: User `~/.cursor/mcp.json`; проектный `mcpServers` не заполнять
-- В продукте: сессионные `brief.md` / `plan.md` / `state.md` обычно в `.gitignore` (не в этом шаблоне)
-- always: `00`, `07`, `90` · globs: `nuxt-template` · requestable: `01`–`06`
+- Сессионные `brief.md` / `plan.md` / `state.md` и `.planning/figma/` — в `.gitignore`, и в шаблоне, и в продукте
+- always: `00`, `07`, `08`, `90` · globs: `nuxt-template` · requestable: `01`–`06`, `09`
 - Slash: `/brief` `/wave-done` `/verify` `/code-review`
 
 ## Ограничения для агента
