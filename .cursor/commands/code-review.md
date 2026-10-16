@@ -7,9 +7,9 @@ argument-hint: [mr-iid | mr-url | пусто = local]
 
 **Input:** $ARGUMENTS · Протокол: `04-verify-and-done.mdc`
 
-| Input      | Режим                                                       |
-| ---------- | ----------------------------------------------------------- |
-| Пусто      | **Local** — `git diff --name-only HEAD`, файлы целиком      |
+| Input      | Режим                                                      |
+| ---------- | ---------------------------------------------------------- |
+| Пусто      | **Local** — `git diff --name-only HEAD`, файлы целиком     |
 | MR IID/URL | **GitLab** — MCP `review-merge-request` или `glab mr diff` |
 
 Платформа **GitLab**, не GitHub / `gh pr`.

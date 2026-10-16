@@ -5,7 +5,21 @@ import { scssAtRules } from './stylelint-scss-at-rules.mjs'
 export default {
   extends: ['stylelint-config-recommended-vue'],
   plugins: ['stylelint-order'],
-  ignoreFiles: ['**/node_modules/**', '.nuxt/**', '.output/**', 'dist/**'],
+  /** Единственный источник игнора (раньше дублировался в `.stylelintignore`) */
+  ignoreFiles: [
+    '**/node_modules/**',
+    '.pnpm-store/**',
+    '.nuxt/**',
+    '.nitro/**',
+    '.data/**',
+    '.cache/**',
+    '.output/**',
+    'dist/**',
+    'coverage/**',
+    '.cursor/**',
+    '.idea/**',
+    'pnpm-lock.yaml',
+  ],
   /** SCSS-директивы для `at-rule-no-unknown` — см. `stylelint-scss-at-rules.mjs` */
   languageOptions: {
     syntax: { atRules: scssAtRules },

@@ -3,7 +3,7 @@
  * Цвета: FORCE_COLOR=1 (выставляется в .husky/pre-commit).
  */
 import { execSync, spawnSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -69,10 +69,39 @@ console.log()
 console.log(top)
 row('')
 row(`${bold(cyan(getPackageDisplayName()))}${dim('  ·  ')}${bold(yellow('pre-commit'))}`)
-row(dim('lint-staged  →  Prettier (весь репозиторий, как lint:all)'))
+row(dim('lint-staged → Prettier · правила → AGENTS.md/.dsh'))
 row('')
 console.log(bot)
 console.log()
+
+const t0 = Date.now()
+const envClean = { ...process.env }
+delete envClean.NO_COLOR
+const spawnEnv = { ...envClean, FORCE_COLOR: '1' }
+
+/** Рассинхрон правил и сгенерированных AGENTS.md / скиллов — стоп до коммита. */
+function checkRules() {
+  if (!existsSync(join(root, '.cursor', 'check-rules.mjs'))) return 0
+  const r = spawnSync('node', ['.cursor/check-rules.mjs'], {
+    cwd: root,
+    stdio: ['ignore', 'inherit', 'inherit'],
+    env: spawnEnv,
+  })
+  return r.status ?? (r.signal ? 1 : 0)
+}
+
+const rulesStatus = checkRules()
+
+if (rulesStatus !== 0) {
+  console.log(dim(`  ${sep}`))
+  console.log(
+    `  ${red('✗')}  ${bold('Pre-commit остановлен')}  ${dim('·  правила разошлись с AGENTS.md/.dsh')}`,
+  )
+  console.log(dim(`  ${sep}`))
+  console.log(dim('  Пересоберите:'), yellow('node .cursor/sync-rules.mjs'))
+  console.log()
+  process.exit(rulesStatus)
+}
 
 const staged = getStagedFiles()
 
@@ -93,11 +122,6 @@ if (lintable.length === 0) {
   console.log()
   process.exit(0)
 }
-
-const t0 = Date.now()
-const envClean = { ...process.env }
-delete envClean.NO_COLOR
-const spawnEnv = { ...envClean, FORCE_COLOR: '1' }
 
 const r = spawnSync('pnpm', ['exec', 'lint-staged', '--concurrent', 'false'], {
   cwd: root,

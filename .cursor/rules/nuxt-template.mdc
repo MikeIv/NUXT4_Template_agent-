@@ -36,4 +36,4 @@ Composition API, `<script setup lang="ts">`. Типизировать props/emit
 
 ## Линтинг
 
-ESLint + Prettier (`*.vue` в `.prettierignore`). Stylelint SFC. Husky + lint-staged.
+ESLint + Prettier (форматируется всё, включая `*.vue`). Stylelint: SFC и `*.scss` / `*.css`. Husky: pre-commit (lint-staged, `format:check`, проверка правил) + pre-push (`lint:all`).

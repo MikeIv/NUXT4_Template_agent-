@@ -50,7 +50,10 @@ export function skillDescription(rule) {
 
 /** Классификация правил каталога: always (в AGENTS.md) и остальные (в скиллы). */
 export function classifyRules(rulesDir) {
-  const files = fs.readdirSync(rulesDir).filter((f) => f.endsWith('.mdc')).sort()
+  const files = fs
+    .readdirSync(rulesDir)
+    .filter((f) => f.endsWith('.mdc'))
+    .sort()
   const always = []
   const conditional = []
   for (const f of files) {
@@ -110,7 +113,9 @@ export function syncRules(root) {
           .map((c) => `${c.id} (${c.globs || 'процесс'})`)
           .join('; ')}. -->`
       : null,
-    conditional.length ? '<!-- Если задача касается этих путей или фазы — загрузи скилл до работы. -->' : null,
+    conditional.length
+      ? '<!-- Если задача касается этих путей или фазы — загрузи скилл до работы. -->'
+      : null,
     '',
   ].filter((x) => x !== null)
 

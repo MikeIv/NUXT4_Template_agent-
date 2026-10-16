@@ -18,7 +18,7 @@ alwaysApply: true
 
 **Фазы:** Discuss (`01`) → Plan (`02`, L+) → Execute (`03`) → Verify (`04`).
 
-**Verify (кратко):** S — lint · M — `pnpm lint:all` (+ `pnpm typecheck` при API/типах; тесты — `pnpm test`, если есть) · L+ — `pnpm verify` + `pnpm test` + `pnpm build` + `/code-review`. M + HTTP composables — mini-review CRITICAL/HIGH из `04`.
+**Verify (кратко):** S — lint · M — `pnpm lint:all` (+ `pnpm typecheck` при API/типах) · L+ — `pnpm verify` + `pnpm build` + `/code-review`. M + HTTP composables — mini-review CRITICAL/HIGH из `04`.
 
 **Принципы:** минимальный diff · эталон из репо (`90`) · причина, не симптом (M+) · типы первыми (L+/API) · неуверенность → Discuss.
 

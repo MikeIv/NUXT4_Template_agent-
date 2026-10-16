@@ -1,6 +1,6 @@
 <!-- ФАЙЛ СГЕНЕРИРОВАН: .cursor/sync-rules.mjs — не редактируй вручную. -->
 <!-- Источник правил: .cursor/rules/*.mdc. Обновить: node .cursor/sync-rules.mjs -->
-<!-- Включены правила с alwaysApply: true — 4 шт., 12048 байт. -->
+<!-- Включены правила с alwaysApply: true — 4 шт., 11987 байт. -->
 <!-- Остальные правила лежат скиллами в .dsh/skills и подгружаются по требованию: 01-discuss-before-code (процесс); 02-planning-gsd (процесс); 03-execution-discipline (процесс); 04-verify-and-done (процесс); 05-context-hygiene (процесс); 06-fundamental-principles (процесс); 09-figma-rest (процесс); nuxt-template (app/**/*.{ts,vue,scss},server/**/*.{ts,vue,scss},shared/**/*.{ts,vue,scss}). -->
 <!-- Если задача касается этих путей или фазы — загрузи скилл до работы. -->
 
@@ -19,7 +19,7 @@
 
 **Фазы:** Discuss (`01`) → Plan (`02`, L+) → Execute (`03`) → Verify (`04`).
 
-**Verify (кратко):** S — lint · M — `pnpm lint:all` (+ `pnpm typecheck` при API/типах; тесты — `pnpm test`, если есть) · L+ — `pnpm verify` + `pnpm test` + `pnpm build` + `/code-review`. M + HTTP composables — mini-review CRITICAL/HIGH из `04`.
+**Verify (кратко):** S — lint · M — `pnpm lint:all` (+ `pnpm typecheck` при API/типах) · L+ — `pnpm verify` + `pnpm build` + `/code-review`. M + HTTP composables — mini-review CRITICAL/HIGH из `04`.
 
 **Принципы:** минимальный diff · эталон из репо (`90`) · причина, не симптом (M+) · типы первыми (L+/API) · неуверенность → Discuss.
 

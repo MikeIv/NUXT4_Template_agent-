@@ -20,7 +20,11 @@ const skillsDir = path.join(root, '.dsh', 'skills')
 
 /** Та же нормализация, что и в сборке AGENTS.md. */
 export const normalizeSyncedText = (text) =>
-  text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim().replace(/\n{3,}/g, '\n\n')
+  text
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .trim()
+    .replace(/\n{3,}/g, '\n\n')
 
 if (!fs.existsSync(rulesDir)) {
   console.log('check-rules: .cursor/rules отсутствует — проверять нечего (пропуск)')
@@ -36,7 +40,10 @@ const problems = []
 let alwaysCount = 0
 let skillCount = 0
 
-for (const file of fs.readdirSync(rulesDir).filter((f) => f.endsWith('.mdc')).sort()) {
+for (const file of fs
+  .readdirSync(rulesDir)
+  .filter((f) => f.endsWith('.mdc'))
+  .sort()) {
   const { fm, body } = parseRule(path.join(rulesDir, file))
   if (!body) continue
   const id = file.replace(/\.mdc$/, '')
@@ -59,7 +66,8 @@ for (const file of fs.readdirSync(rulesDir).filter((f) => f.endsWith('.mdc')).so
   skillCount++
   const skill = fs.readFileSync(skillFile, 'utf8')
   if (!skill.includes(`name: ${id}`)) problems.push(`скилл ${id} без строки name: ${id}`)
-  if (!skill.includes(skillDescription(rule))) problems.push(`скилл ${id}: описание не совпадает с правилом`)
+  if (!skill.includes(skillDescription(rule)))
+    problems.push(`скилл ${id}: описание не совпадает с правилом`)
   if (!normalizeSyncedText(skill).includes(normalizeSyncedText(body))) {
     problems.push(`скилл ${id} не содержит тело правила ${file}`)
   }

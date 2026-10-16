@@ -15,7 +15,6 @@ export default withNuxt(
       'dist',
       '.pnpm-store',
       'coverage',
-      '.cursor',
       '.idea',
       'pnpm-lock.yaml',
       '**/pnpm-lock.yaml',

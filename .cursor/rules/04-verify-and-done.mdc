@@ -19,10 +19,10 @@ alwaysApply: false
 
 - **S/M** без новой бизнес-логики — не требуются
 - **M+** API/auth/business logic — smoke или unit, если инфраструктура есть
-- **L+** — тест обязателен или явное «нет тестов, потому что…»
-- Проверки — командой проекта (`pnpm test`); HTTP-композаблы — `pnpm test:component`, если такой скрипт есть
+- **L+** — тест или явная строка в отчёте «нет тестов: …» (в шаблоне тест-скриптов нет)
+- Проверки — скриптами проекта, если они есть (`pnpm test` / `pnpm test:component`); скрипта нет — так и сказать в отчёте
 - Падение не всегда видно в сводке: unhandled rejection в чужом рендере роняет прогон (exit 1), но не красит assert — смотреть полный вывод
-- Перед пушем проверки запускает хук проекта (`.husky/pre-push` → `scripts/pre-push.mjs`), если он есть; `--no-verify` — только осознанно
+- Перед пушем проверки запускает хук проекта (`.husky/pre-push` → `scripts/pre-push.mjs`): `pnpm lint:all`; `--no-verify` — только осознанно
 
 ## Security (Nuxt / Nitro)
 
@@ -41,7 +41,7 @@ alwaysApply: false
 | ------ | -------------------------------------------- |
 | **S**  | ReadLints / lint                             |
 | **M**  | `pnpm lint:all` **один раз**; при API/типах — `pnpm typecheck`; тесты проекта — если есть; без browser MCP |
-| **L+** | `pnpm verify` + `pnpm test` + `pnpm build`; code-review |
+| **L+** | `pnpm verify` + `pnpm build`; code-review    |
 
 Не «готово», пока обязательные проверки не пройдены (если агент может запустить).
 

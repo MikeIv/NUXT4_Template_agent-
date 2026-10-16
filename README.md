@@ -86,22 +86,22 @@ pnpm approve-builds --all
 | `pnpm lint:fix`      | ESLint с автоисправлением                                                |
 | `pnpm format`        | Prettier — запись                                                        |
 | `pnpm format:check`  | Prettier — проверка без записи                                           |
-| `pnpm stylelint`     | Stylelint для `*.vue` и `*.css`                                          |
+| `pnpm stylelint`     | Stylelint для `*.vue`, `*.scss`, `*.css`                                 |
 | `pnpm stylelint:fix` | Stylelint с автоисправлением                                             |
 | `pnpm lint:all`      | последовательно ESLint + Prettier (check) + Stylelint                    |
 | `pnpm typecheck`     | `nuxt typecheck`                                                         |
-| `pnpm verify`        | `lint:all` + `typecheck`                                                 |
+| `pnpm verify`        | `lint:all` + проверка правил (`.cursor`/`.dsh`) + `typecheck`            |
 
 ## Качество кода и pre-commit
 
 - **ESLint**: `@nuxt/eslint`, конфиг [`eslint.config.mjs`](eslint.config.mjs).
-- **Prettier**: [`prettier.config.mjs`](prettier.config.mjs); файлы `*.vue` в Prettier **не** форматируются (см. [`.prettierignore`](.prettierignore)).
-- **Stylelint**: минимальная конфигурация для стилей в SFC — [`stylelint.config.mjs`](stylelint.config.mjs).
-- **Husky**: хук [`.husky/pre-commit`](.husky/pre-commit) вызывает [`scripts/pre-commit.mjs`](scripts/pre-commit.mjs) — баннер с именем из `package.json`, lint-staged с флагом `--concurrent false`.
+- **Prettier**: [`prettier.config.mjs`](prettier.config.mjs) — форматирует всё, включая `*.vue`; [`prettierignore`](.prettierignore) исключает сгенерированные `AGENTS.md`, `.dsh` и служебные каталоги.
+- **Stylelint**: [`stylelint.config.mjs`](stylelint.config.mjs) — рекомендованный набор для SFC (`*.vue`) плюс проектные правила для `*.scss` / `*.css`: SCSS-директивы, порядок свойств; игнор — `ignoreFiles` в конфиге.
+- **Husky**: [`pre-commit`](.husky/pre-commit) → [`scripts/pre-commit.mjs`](scripts/pre-commit.mjs) (баннер с именем из `package.json`, lint-staged `--concurrent false`, `format:check`, проверка рассинхрона правил) и [`pre-push`](.husky/pre-push) → [`scripts/pre-push.mjs`](scripts/pre-push.mjs) (`pnpm lint:all`).
 - **lint-staged**: [`lint-staged.config.mjs`](lint-staged.config.mjs). Если в коммите только файлы вне типов для линта, проверки **пропускаются** с пояснением.
 - **CI**: минимальный GitLab pipeline — [`.gitlab-ci.yml`](.gitlab-ci.yml) (`pnpm verify` → `pnpm build`).
 
-Коммит без хуков: `git commit --no-verify` (использовать осознанно).
+Коммит или push без хуков: `git commit --no-verify` / `git push --no-verify` (использовать осознанно).
 
 ## Структура проекта (кратко)
 
