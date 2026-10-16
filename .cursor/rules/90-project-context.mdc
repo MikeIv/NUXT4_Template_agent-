@@ -34,6 +34,9 @@ pnpm dev | typecheck | verify | build | lint:all
 
 Перед вёрсткой: skill `figma-design-to-code` → **1×** `get_design_context` (primary) + `get_screenshot` для остальных брейкпоинтов. Лимиты — `07`.
 
+- **fileKey** — только отсюда: у файла бывают живые копии с одинаковым именем, перед вёрсткой сверять `node scripts/figma.mjs meta`.
+- **DS Harness:** MCP Figma не работает (OAuth) — макет читается REST-хелпером `node scripts/figma.mjs nodes|png <nodeId>`; детали и лимиты — `09-figma-rest`.
+
 ## MCP
 
 Серверы — **User** `~/.cursor/mcp.json`. Проектный `.cursor/mcp.json` — пустой `mcpServers` (иначе Cursor отключает User-копии с теми же именами). Не прописывать nuxt / context7 / figma / mdn в проект.

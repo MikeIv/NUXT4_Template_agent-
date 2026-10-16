@@ -17,7 +17,10 @@
     "stylelint:fix": "stylelint \"**/*.{vue,css}\" --fix --allow-empty-input",
     "lint:all": "eslint . && pnpm format:check && stylelint \"**/*.{vue,css}\" --allow-empty-input",
     "typecheck": "nuxt typecheck",
-    "verify": "pnpm lint:all && pnpm typecheck"
+    "verify": "pnpm lint:all && pnpm typecheck",
+    "figma:meta": "node scripts/figma.mjs meta",
+    "figma:nodes": "node scripts/figma.mjs nodes",
+    "figma:png": "node scripts/figma.mjs png"
   },
   "dependencies": {
     "nuxt": "^4.5.2",

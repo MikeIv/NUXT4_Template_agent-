@@ -22,12 +22,12 @@
 
 | Режим       | Правила                                          |
 | ----------- | ------------------------------------------------ |
-| always      | `00`, `07`, `90`                                 |
+| always      | `00`, `07`, `08`, `90`                           |
 | globs       | `nuxt-template` (`app/` · `server/` · `shared/`) |
-| requestable | `01`–`06`                                        |
+| requestable | `01`–`06`, `09`                                  |
 
 Slash: `/brief` `/wave-done` `/verify` `/code-review`.
-Синхронизация workflow: `d:\_WEB\_Work\_Cursor-rules-template` (`00`–`07`); `90` — только дополнять.
+Синхронизация workflow: `d:\_WEB\_Work\_Cursor-rules-template` (`00`–`09`); `90` — только дополнять.
 
 ## Требования
 
