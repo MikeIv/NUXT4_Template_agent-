@@ -11,7 +11,7 @@ description: Гигиена контекста — узкий input, handoff ч�
 
 - Один фокус — текущая волна; не читать весь репо «на всякий случай»
 - Код — только релевантные файлы; эталоны — таблица в `90`
-- Task/Explore — широкий поиск; grep/read — точечный
+- Широкий поиск (Cursor: Task/Explore; DS Harness: `subagent`) — отдельно от точечного grep/read
 - Не дублировать diff в чат — итог в `state.md`
 
 ## Handoff между сессиями
@@ -23,7 +23,7 @@ description: Гигиена контекста — узкий input, handoff ч�
 | `.planning/state.md`   | Итог волны (3–5 строк)       |
 | `.planning/plan.md`    | План L/XL                    |
 
-Команды: `/brief`, `/wave-done`, `/verify`.
+Команды Cursor: `/brief`, `/wave-done`, `/verify`; в DS Harness команд нет — тот же смысл по просьбе, шаблоны в `.cursor/commands`.
 
 ## MCP
 
@@ -31,7 +31,7 @@ description: Гигиена контекста — узкий input, handoff ч�
 
 **Figma (вёрстка секции):**
 
-1. Skill `figma-design-to-code` — один раз
+1. Контекст секции — один раз (Cursor — MCP, DS Harness — REST `09-figma-rest`)
 2. **`get_design_context`** — один primary node (mobile-first)
 3. **`get_screenshot`** — tablet/desktop/UI-kit, если в промпте несколько URL
 4. Не параллелить несколько `get_design_context` — главный источник перерасхода токенов

@@ -29,6 +29,8 @@ alwaysApply: true
 
 ## MCP и инструменты
 
+Имена — инструменты Cursor (MCP); в DS Harness их заменяют серверы `context7` / `nuxt` / `mdn` и REST-хелпер Figma (`09-figma-rest`).
+
 | Инструмент | Лимит |
 | ---------- | ----- |
 | **Figma `get_design_context`** | **1×** на волну — primary breakpoint (обычно mobile) |
@@ -36,7 +38,7 @@ alwaysApply: true
 | **Figma `get_metadata`** | Только для slug/имён страниц, не для вёрстки секции |
 | **Browser MCP** | Только по явному запросу пользователя (`05`, `04`) |
 | **`pnpm lint:all`** | **1×** перед «готово»; не перезапускать после каждой правки |
-| **Task explore** | Не для точечного grep/read по известным путям |
+| **Широкий поиск** (Cursor: Task explore; DS Harness: `subagent`) | Не для точечного grep/read по известным путям |
 | **Проектный `mcp.json`** | Пустой `mcpServers`. Серверы — User `~/.cursor/mcp.json`. Не дублировать имена |
 
 Несколько node-id в промпте — не повод вызывать `get_design_context` на каждый; остальные — screenshot или адаптация по брейкпоинтам проекта.

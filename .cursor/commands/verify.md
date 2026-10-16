@@ -9,7 +9,7 @@ argument-hint: [S|M|L|XL или пусто = из brief/контекста]
 
 | Класс  | Запустить                                         |
 | ------ | ------------------------------------------------- |
-| **S**  | ReadLints / `pnpm lint`                           |
+| **S**  | `pnpm lint`                                       |
 | **M**  | `pnpm lint:all`; при API/типах — `pnpm typecheck` |
 | **L+** | `pnpm verify` + `pnpm build`                      |
 

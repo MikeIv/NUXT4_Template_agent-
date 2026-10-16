@@ -40,7 +40,7 @@ Slash: `/brief` `/wave-done` `/verify` `/code-review`.
 
 ## Требования
 
-- Node.js LTS (рекомендуется актуальная LTS; Nuxt 4.5 — Node `^22.19.0 || ^24.11.0 || >=26.0.0`, см. `engines` в `package.json`)
+- Node.js — по `engines` в `package.json` (`^22.19.0 || ^24.11.0 || >=26.0.0`); в CI зафиксирован `node:22`
 - [pnpm](https://pnpm.io/) 11.x (в репозитории зафиксирована версия через поле `packageManager` и Corepack)
 
 ## Установка
@@ -76,21 +76,24 @@ pnpm approve-builds --all
 
 ## Скрипты
 
-| Команда              | Назначение                                                               |
-| -------------------- | ------------------------------------------------------------------------ |
-| `pnpm dev`           | dev-сервер (по умолчанию [http://localhost:3000](http://localhost:3000)) |
-| `pnpm build`         | production-сборка                                                        |
-| `pnpm preview`       | локальный просмотр собранного приложения                                 |
-| `pnpm generate`      | статическая генерация (при необходимости)                                |
-| `pnpm lint`          | ESLint по проекту                                                        |
-| `pnpm lint:fix`      | ESLint с автоисправлением                                                |
-| `pnpm format`        | Prettier — запись                                                        |
-| `pnpm format:check`  | Prettier — проверка без записи                                           |
-| `pnpm stylelint`     | Stylelint для `*.vue`, `*.scss`, `*.css`                                 |
-| `pnpm stylelint:fix` | Stylelint с автоисправлением                                             |
-| `pnpm lint:all`      | последовательно ESLint + Prettier (check) + Stylelint                    |
-| `pnpm typecheck`     | `nuxt typecheck`                                                         |
-| `pnpm verify`        | `lint:all` + проверка правил (`.cursor`/`.dsh`) + `typecheck`            |
+| Команда              | Назначение                                                                 |
+| -------------------- | -------------------------------------------------------------------------- |
+| `pnpm dev`           | dev-сервер (по умолчанию [http://localhost:3000](http://localhost:3000))   |
+| `pnpm build`         | production-сборка                                                          |
+| `pnpm preview`       | локальный просмотр собранного приложения                                   |
+| `pnpm generate`      | статическая генерация (при необходимости)                                  |
+| `pnpm lint`          | ESLint по проекту                                                          |
+| `pnpm lint:fix`      | ESLint с автоисправлением                                                  |
+| `pnpm format`        | Prettier — запись                                                          |
+| `pnpm format:check`  | Prettier — проверка без записи                                             |
+| `pnpm stylelint`     | Stylelint для `*.vue`, `*.scss`, `*.css`                                   |
+| `pnpm stylelint:fix` | Stylelint с автоисправлением                                               |
+| `pnpm lint:all`      | последовательно ESLint + Prettier (check) + Stylelint                      |
+| `pnpm typecheck`     | `nuxt typecheck`                                                           |
+| `pnpm verify`        | `lint:all` + проверка правил (`.cursor`/`.dsh`) + `typecheck`              |
+| `pnpm figma:meta`    | Figma REST: `fileKey`, страницы, дата правки                               |
+| `pnpm figma:nodes`   | узел макета: дерево, тексты, шрифты (`--json` — дамп в `.planning/figma/`) |
+| `pnpm figma:png`     | рендер узла в PNG (`@2x`) → `.planning/figma/`                             |
 
 ## Качество кода и pre-commit
 
@@ -99,9 +102,16 @@ pnpm approve-builds --all
 - **Stylelint**: [`stylelint.config.mjs`](stylelint.config.mjs) — рекомендованный набор для SFC (`*.vue`) плюс проектные правила для `*.scss` / `*.css`: SCSS-директивы, порядок свойств; игнор — `ignoreFiles` в конфиге.
 - **Husky**: [`pre-commit`](.husky/pre-commit) → [`scripts/pre-commit.mjs`](scripts/pre-commit.mjs) (баннер с именем из `package.json`, lint-staged `--concurrent false`, `format:check`, проверка рассинхрона правил) и [`pre-push`](.husky/pre-push) → [`scripts/pre-push.mjs`](scripts/pre-push.mjs) (`pnpm lint:all`).
 - **lint-staged**: [`lint-staged.config.mjs`](lint-staged.config.mjs). Если в коммите только файлы вне типов для линта, проверки **пропускаются** с пояснением.
-- **CI**: минимальный GitLab pipeline — [`.gitlab-ci.yml`](.gitlab-ci.yml) (`pnpm verify` → `pnpm build`).
+- **CI**: [`.gitlab-ci.yml`](.gitlab-ci.yml) — GitLab pipeline (`pnpm verify` → `pnpm build`); репозиторий шаблона живёт на GitHub, для него добавьте workflow по аналогии.
 
 Коммит или push без хуков: `git commit --no-verify` / `git push --no-verify` (использовать осознанно).
+
+## Макет Figma
+
+- `fileKey` и `nodeId` продукта живут в [`90-project-context.mdc`](.cursor/rules/90-project-context.mdc): скрипт берёт ключ оттуда, переопределение — `--key` или `FIGMA_FILE_KEY`.
+- Токен: переменная окружения `FIGMA_TOKEN` (в шелле; `.env` скрипт **не** читает) либо локальный файл `~/.dsh/figma-pat.txt`.
+- Cursor читает макет через MCP `figma` (лимиты — правило `07`); DS Harness — через [`scripts/figma.mjs`](scripts/figma.mjs), детали и лимиты — правило `09-figma-rest`.
+- Дампы и рендеры складываются в `.planning/figma/` (в `.gitignore`); вёрстка — один кадр за волну.
 
 ## Структура проекта (кратко)
 

@@ -1,6 +1,6 @@
 <!-- ФАЙЛ СГЕНЕРИРОВАН: .cursor/sync-rules.mjs — не редактируй вручную. -->
 <!-- Источник правил: .cursor/rules/*.mdc. Обновить: node .cursor/sync-rules.mjs -->
-<!-- Включены правила с alwaysApply: true — 4 шт., 11987 байт. -->
+<!-- Включены правила с alwaysApply: true — 4 шт., 12700 байт. -->
 <!-- Остальные правила лежат скиллами в .dsh/skills и подгружаются по требованию: 01-discuss-before-code (процесс); 02-planning-gsd (процесс); 03-execution-discipline (процесс); 04-verify-and-done (процесс); 05-context-hygiene (процесс); 06-fundamental-principles (процесс); 09-figma-rest (процесс); nuxt-template (app/**/*.{ts,vue,scss},server/**/*.{ts,vue,scss},shared/**/*.{ts,vue,scss}). -->
 <!-- Если задача касается этих путей или фазы — загрузи скилл до работы. -->
 
@@ -25,7 +25,7 @@
 
 **Стоп:** противоречивые требования; auth/роли/контракт API; удаление данных; нет env/API; scope меняется — спросить.
 
-**Язык:** русский. **Приоритет:** репо `rules/` > User Rules.
+**Язык:** русский. **Приоритет:** проектные правила > личные (Cursor User Rules / `~/.dsh/AGENTS.md`).
 
 # Экономия токенов
 
@@ -53,6 +53,8 @@
 
 ## MCP и инструменты
 
+Имена — инструменты Cursor (MCP); в DS Harness их заменяют серверы `context7` / `nuxt` / `mdn` и REST-хелпер Figma (`09-figma-rest`).
+
 | Инструмент | Лимит |
 | ---------- | ----- |
 | **Figma `get_design_context`** | **1×** на волну — primary breakpoint (обычно mobile) |
@@ -60,7 +62,7 @@
 | **Figma `get_metadata`** | Только для slug/имён страниц, не для вёрстки секции |
 | **Browser MCP** | Только по явному запросу пользователя (`05`, `04`) |
 | **`pnpm lint:all`** | **1×** перед «готово»; не перезапускать после каждой правки |
-| **Task explore** | Не для точечного grep/read по известным путям |
+| **Широкий поиск** (Cursor: Task explore; DS Harness: `subagent`) | Не для точечного grep/read по известным путям |
 | **Проектный `mcp.json`** | Пустой `mcpServers`. Серверы — User `~/.cursor/mcp.json`. Не дублировать имена |
 
 Несколько node-id в промпте — не повод вызывать `get_design_context` на каждый; остальные — screenshot или адаптация по брейкпоинтам проекта.
@@ -114,6 +116,11 @@
 - Коммитить без явной просьбы (`03`).
 - Аудит в режиме записи: аудит ведётся в сессии с правами **read-only**.
 
+## Словарь инструментов
+
+В правилах встречаются имена Cursor (`Task explore`, `ReadLints`, MCP из User `~/.cursor/mcp.json`, команды `/brief` и др.).
+Их перевод для DS Harness — в `AGENTS.local.md`, раздел «Инструменты Cursor → DS Harness».
+
 # Nuxt 4 Template
 
 **Пакет:** переименовать в новом проекте · **SSR:** включён.
@@ -143,7 +150,7 @@ pnpm dev | typecheck | verify | build | lint:all
 
 Если в продукте есть макет — укажите fileKey / nodeId здесь. Вёрстка поэтапно, один кадр за волну.
 
-Перед вёрсткой: skill `figma-design-to-code` → **1×** `get_design_context` (primary) + `get_screenshot` для остальных брейкпоинтов. Лимиты — `07`.
+Чтение кадра: Cursor — MCP (`get_design_context` primary **1×** + `get_screenshot`), DS Harness — REST `09-figma-rest`. Лимиты — `07`.
 
 - **fileKey** — только отсюда: у файла бывают живые копии с одинаковым именем, перед вёрсткой сверять `node scripts/figma.mjs meta`.
 - **DS Harness:** MCP Figma не работает (OAuth) — макет читается REST-хелпером `node scripts/figma.mjs nodes|png <nodeId>`; детали и лимиты — `09-figma-rest`.
@@ -157,11 +164,11 @@ pnpm dev | typecheck | verify | build | lint:all
 - Макет → **figma**, если есть файл
 - Web platform / compat → **mdn**
 - GitLab → GitKraken (User extension), не дублировать official GitLab MCP
-- Код проекта → read/grep; широкий поиск → Task explore
+- Код проекта → read/grep; широкий поиск → Task explore (Cursor) / `subagent` (DS Harness)
 
 ## Ограничения
 
-- GitLab; коммиты по просьбе; не коммитить `.env`
+- Платформа ревью — по remote проекта (GitLab MR или GitHub PR); коммиты по просьбе; не коммитить `.env`
 - Не отключать SSR, не менять `srcDir`, ESLint/Husky pipeline, массовые `--fs-*` / брейкпоинты без запроса
 - API только через `useApi` / `useApiFetch` / `serverApi`
 - **M+:** `cp .planning/brief-template.md .planning/brief.md` или `/brief`

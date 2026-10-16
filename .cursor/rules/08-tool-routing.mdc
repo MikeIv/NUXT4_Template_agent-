@@ -47,3 +47,8 @@ alwaysApply: true
 - Править `AGENTS.md` руками: он генерируется из `.cursor/rules` командой `node .cursor/sync-rules.mjs`.
 - Коммитить без явной просьбы (`03`).
 - Аудит в режиме записи: аудит ведётся в сессии с правами **read-only**.
+
+## Словарь инструментов
+
+В правилах встречаются имена Cursor (`Task explore`, `ReadLints`, MCP из User `~/.cursor/mcp.json`, команды `/brief` и др.).
+Их перевод для DS Harness — в `AGENTS.local.md`, раздел «Инструменты Cursor → DS Harness».

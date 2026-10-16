@@ -41,7 +41,7 @@ description: Verify, security (Nuxt/Nitro), code-review — чеклист «г�
 
 | Класс  | Минимум                                      |
 | ------ | -------------------------------------------- |
-| **S**  | ReadLints / lint                             |
+| **S**  | lint (`pnpm lint`; в Cursor — ReadLints)     |
 | **M**  | `pnpm lint:all` **один раз**; при API/типах — `pnpm typecheck`; тесты проекта — если есть; без browser MCP |
 | **L+** | `pnpm verify` + `pnpm build`; code-review    |
 
@@ -57,7 +57,7 @@ description: Verify, security (Nuxt/Nitro), code-review — чеклист «г�
 
 Severity: **CRITICAL** секреты, XSS, ввод в `server/api`, auth · **HIGH** stack, raw `fetch`, `any` · **MEDIUM** a11y, edge · **LOW** стиль.
 
-**GitLab** (MR), не GitHub. Коммиты — только по просьбе; без push/`--no-verify` без разрешения.
+**Платформа ревью — по remote проекта** (GitLab MR или GitHub PR). Коммиты — только по просьбе; без push/`--no-verify` без разрешения.
 
 ### Режим local
 
@@ -65,7 +65,7 @@ Severity: **CRITICAL** секреты, XSS, ввод в `server/api`, auth · **
 
 ### Режим GitLab MR
 
-Номер / URL `…/merge_requests/N`: GitLab MCP `review-merge-request` или `glab mr diff`. L+: зелёный pipeline до APPROVE.
+Номер / URL MR или PR: инструмент — по доступным серверам (GitLab — GitKraken User-расширение; `glab` и MCP `review-merge-request` в шаблоне не гарантированы). L+: зелёный pipeline до APPROVE.
 
 **L+ продукт:** spec · quality · consistency с `nuxt-template.mdc` / `useApi`.
 

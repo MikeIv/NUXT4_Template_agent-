@@ -28,7 +28,7 @@ Composition API, `<script setup lang="ts">`. Типизировать props/emit
 
 ## Макет
 
-Если в `90` указан Figma — вёрстка поэтапно, один кадр за волну. Адаптировать под токены и mobile-first. Skill `figma-design-to-code` до `get_design_context`. Лимиты MCP — `07` / `05`.
+Если в `90` указан Figma — вёрстка поэтапно, один кадр за волну. Адаптировать под токены и mobile-first. Чтение кадра: Cursor — MCP, DS Harness — REST (`09-figma-rest`). Лимиты — `07` / `05`.
 
 ## a11y
 
