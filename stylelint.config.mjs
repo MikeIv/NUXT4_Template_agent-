@@ -1,10 +1,15 @@
 import { propertiesOrderRule } from './stylelint-properties-order.mjs'
+import { scssAtRules } from './stylelint-scss-at-rules.mjs'
 
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['stylelint-config-recommended-vue'],
   plugins: ['stylelint-order'],
   ignoreFiles: ['**/node_modules/**', '.nuxt/**', '.output/**', 'dist/**'],
+  /** SCSS-директивы для `at-rule-no-unknown` — см. `stylelint-scss-at-rules.mjs` */
+  languageOptions: {
+    syntax: { atRules: scssAtRules },
+  },
   /** SCSS: `//`-комментарии и `#{}` обычный postcss-парсер не разбирает */
   overrides: [
     {
@@ -18,10 +23,10 @@ export default {
     /** BEM / CSS modules — не навязываем паттерн имён классов */
     'selector-class-pattern': null,
     /**
-     * CSS-список at-rule не знает SCSS (`@use`, `@include`) — правило выключено.
-     * SCSS-вариант даёт `stylelint-config-recommended-scss` (`scss/at-rule-no-unknown`).
+     * CSS-список at-rule не знает SCSS (`@use`, `@include`) — своя часть объявлена
+     * в `languageOptions` выше, поэтому опечатки (`@inclde`) ловятся.
      */
-    'at-rule-no-unknown': null,
+    'at-rule-no-unknown': true,
     /** Гибче для вложенности в блоках `<style>` SFC (в т.ч. CSS modules) */
     'rule-empty-line-before': null,
     /** Порядок CSS-свойств в declaration blocks — см. `stylelint-properties-order.mjs` */
